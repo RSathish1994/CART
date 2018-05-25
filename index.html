@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="addToCardApp">
+<head>
+	<title>MOBILES</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+	
+	<style>
+		.btn.btn-danger{
+			padding: 0px 8px;
+			border-radius: 0px;
+			float: right;
+		}
+		.btn.btn-success{
+			padding: 5px 15px;
+			border-radius: 0px;
+			margin: 5px;
+		}
+		.product{
+			border: 1px solid #f3f3f3;
+			padding: 15px;
+		}
+		.thumbnail {
+			border: 1px solid #f1f1f1;
+			border-radius: 0px;
+		}
+		.product:hover{
+			box-shadow: 0px 0px 15px 0px #dedede;
+		}
+		.header{
+			text-align: center;
+			padding: 15px;
+			background: #ededed;
+		}
+	</style>
+</head>
+<body ng-controller="addToCardController">
+
+<div class="container">
+		<br>
+		<br>
+	<div class="col-md-12">
+		<h1 class="header">MOBILES</h1>
+	</div>
+	<div class="row">
+		<div class="thumbnails list-unstyled col-md-12">
+			<div class="col-md-9">
+				<div class="col-md-4 " ng-repeat="Product in products track by $index">
+					<div class="product">
+						<div class="thumbnail" style="padding: 0">
+							<div style="padding: 4px">
+								<img ng-src="{{Product.product_image}}" alt="300*200" style="width: 200px">
+							</div>
+						</div>
+						<div class="caption">
+							<h3>{{Product.product_name}}</h3>
+							<p>{{Product.product_desc}}</p>
+							<h3>{{Product.product_price}}</h3>
+							<div class="row">
+								<label class="col-md-6">Add To Cart</label>
+								<input type="checkbox" ng-disabled="Product.product_Selection" class="col-md-6 checkbox" ng-model="Product.product_Selection" ng-click="addToCart($index, Product.product_Selection, Product)">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="thumbnail" style="padding: 0">
+					<div style="padding: 4px">
+					</div>
+					<div class="caption">
+						<h2 class="header">CART</h2>
+						<p ng-repeat="item in cart">{{$index+1}}. {{item.product_name}} - {{item.product_price}}
+							<button class="btn btn-danger" ng-click="removeItemFromCart($index, item)">x</button>
+						</p>
+						<h3>Total Price : 	{{getTotal()}}{{totalValue}}</h3>
+					</div>
+					<button class="btn btn-success" ng-click="chechkout()">PLACE ORDER</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<script type="text/javascript" src="./assets/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/angular.min.js"></script>
+	<script type="text/javascript" src="./js/controller/addToCart.js"></script>
+</body>
+</html>
